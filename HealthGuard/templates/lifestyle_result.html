@@ -1,0 +1,316 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Lifestyle Prediction Result</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #1c2d33;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo a {
+    color: #4caf50;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.content {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1c2d33;
+}
+
+.prediction-box {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.red-box {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.green-box {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product {
+    width: 48%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product a {
+    color: #4caf50;
+    text-decoration: none;
+}
+
+.product a:hover {
+    color: #2e7d32;
+}
+    </style>
+
+</head>
+<body>
+    <header>
+    <div class="navbar">
+        <div class="logo"><a href="landing.html">Health Care</a></div>
+    </div>
+</header>
+
+
+
+
+        <div class="content">
+            <h1>Prediction Result</h1>
+            {% if result == "High risk of heart disease" %}
+                <div class="prediction-box red-box">
+                    <p>{{ result }}</p>
+                </div>
+            {% else %}
+                <div class="prediction-box green-box">
+                    <p>{{ result }}</p>
+                </div>
+            {% endif %}
+
+            <h2>Tips:</h2>
+            {% if tips %}
+                <ul>
+                    {% for tip in tips %}
+                        <li>{{ tip }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No specific tips for your lifestyle choices.</p>
+            {% endif %}
+
+            {% if result == "High risk of heart disease" %}
+                <h2>Additional Resources:</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=abc123" target="_blank">Understanding Heart Disease - Mayo Clinic</a></li>
+                <li><a href="https://www.youtube.com/watch?v=def456" target="_blank">Managing Heart Disease - American Heart Association</a></li>
+                <li><a href="https://www.youtube.com/watch?v=ghi789" target="_blank">Preventing Heart Disease - Healthline</a></li>
+            </ul>
+            <h2>Heart Health Products:</h2>
+            <div class="products">
+                <div class="product">
+                    <a href="https://www.amazon.in/beatXP-Exercise-Adjustable-Cushioned-Handles/dp/B0BVHX3V43/ref=sr_1_4?crid=FHVOGBI1JXLP&dib=eyJ2IjoiMSJ9.FQJQIU89xKswULj8MSRIYF4MPJxX27NTVSnc0nZ99L6cghY6av-BfbNm0h6Fd5-njQHfN9-IIIHZ4HK12PoIuYIeFivT-18tk1dqBzr9290rLeGzrUQGVbfT71vY_KexQWra-F90ptL7P2y9sQDCn5WXzB3EvqUip5hgmwHmQyZYZ36lGbbEdE6Ki0NhZMHW68BIJW7poHI4VxkGoqteJbh743xd25HYYrhy_jQHKJQ.uVhjp5dSBUZ0xRVpd4SFn8qBbj1lz1VOZzXfE4Q3ulE&dib_tag=se&keywords=gym%2Bcycle&qid=1714187391&sprefix=heart%2Caps%2C236&sr=8-4&th=1" target="_blank">
+                        <img src="https://m.media-amazon.com/images/I/41GjAzsXDnL._SX300_SY300_QL70_FMwebp_.jpg" alt="Product 1">
+                         Vortex Active Air Bike Exercise Cycle for Home
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="https://amzn.in/d/jk27CfA" target="_blank">
+                        <img src="https://m.media-amazon.com/images/I/817n+-aD8uL._SX679_.jpg" alt="Product 2">
+                        Boldfit Yoga Mat for Women and Men
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="https://amzn.in/d/2XepKwf" target="_blank">
+                        <img src="https://m.media-amazon.com/images/I/71Q3b861IEL._SX679_.jpg" alt="Product 3">
+                        Dr Trust Signature Series Finger Tip Pulse Oximeter
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="https://amzn.in/d/2XepKwf" target="_blank">
+                        <img src="https://m.media-amazon.com/images/I/618gbVkkSpL._SX679_.jpg" alt="Product 4">
+                        Nirvasa Omega 3 Salmon Fish Oil Softgel Capsules
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Lifestyle Prediction Result</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc; /* Very light gray */
+            color: #1e293b; /* Dark gray-blue */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2563eb; /* Vibrant blue */
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            color: #ffffff; /* White */
+        }
+
+        .logo {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            text-align: center;
+            color: #ffffff; /* White */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .logo a {
+            color: #ffffff; /* White */
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .content {
+            max-width: 800px;
+            width: 100%;
+            background-color: #ffffff; /* White */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b; /* Dark gray-blue */
+        }
+
+        .prediction-box {
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .red-box {
+            background-color: #f44336; /* Bright red */
+            color: #ffffff; /* White */
+        }
+
+        .green-box {
+            background-color: #4caf50; /* Green */
+            color: #ffffff; /* White */
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="landing.html">Health Care</a></div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1>Prediction Result</h1>
+        {% if result == "High risk of heart disease" %}
+        <div class="prediction-box red-box">
+            <p>{{ result }}</p>
+        </div>
+        {% else %}
+        <div class="prediction-box green-box">
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        <h2>Tips:</h2>
+        {% if tips %}
+        <ul>
+            {% for tip in tips %}
+            <li>{{ tip }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No specific tips for your lifestyle choices.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

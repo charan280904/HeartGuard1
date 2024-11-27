@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Reports Prediction</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            width: 100%;
+            background: #2563eb;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .navbar .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .navbar .logo a {
+            color: #ffff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+
+        /* .navbar .logo a:hover {
+            color: #2563eb;
+        } */
+
+        h1 {
+            text-align: center;
+            margin: 100px 0 30px;
+            color: #1c2d33;
+        }
+
+        form {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #1c2d33;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="#">Health Care</a></div>
+        </nav>
+    </header>
+    <h1>Re-admission Risk Prediction</h1>
+    <form action="{{ url_for('medical_predict') }}" method="post">
+        <label for="Age">Age:</label>
+        <input type="text" id="Age" name="Age"><br><br>
+        <label for="Sex">Sex:</label>
+        <select id="Sex" name="Sex">
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select><br><br>
+        <label for="ChestPainType">Chest Pain Type:</label>
+        <select id="ChestPainType" name="ChestPainType">
+            <option value="0">Typical Angina</option>
+            <option value="1">Atypical Angina</option>
+            <option value="2">Non-anginal Pain</option>
+            <option value="3">Asymptomatic</option>
+        </select><br><br>
+        <label for="RestingBP">Resting Blood Pressure (mm Hg):</label>
+        <input type="text" id="RestingBP" name="RestingBP"><br><br>
+        <label for="Cholesterol">Serum Cholesterol (mg/dl):</label>
+        <input type="text" id="Cholesterol" name="Cholesterol"><br><br>
+        <label for="FastingBS">Fasting Blood Sugar &gt; 120 mg/dl:</label>
+        <select id="FastingBS" name="FastingBS">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+        <label for="RestingECG">Resting Electrocardiographic Results:</label>
+        <select id="RestingECG" name="RestingECG">
+            <option value="0">Normal</option>
+            <option value="1">ST-T wave abnormality</option>
+            <option value="2">Left ventricular hypertrophy</option>
+        </select><br><br>
+        <label for="MaxHR">Maximum Heart Rate Achieved:</label>
+        <input type="text" id="MaxHR" name="MaxHR"><br><br>
+        <label for="ExerciseAngina">Exercise Induced Angina:</label>
+        <select id="ExerciseAngina" name="ExerciseAngina">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+        <label for="Oldpeak">ST Depression Induced by Exercise:</label>
+        <input type="text" id="Oldpeak" name="Oldpeak"><br><br>
+        <label for="ST_Slope">Slope of the Peak Exercise ST Segment:</label>
+        <select id="ST_Slope" name="ST_Slope">
+            <option value="0">Upsloping</option>
+            <option value="1">Flat</option>
+            <option value="2">Downsloping</option>
+        </select><br><br>
+        <!-- Hidden input fields for email and password -->
+
+        <!-- Submit button -->
+        <input type="submit" value="Submit">
+
+    </form>
+    <script>
+        window.botpressWebChat.init({
+            "composerPlaceholder": "Chat with bot",
+            "botConversationDescription": "Your personal Heart Healthcare AI assistant.",
+            "botId": "648f13ae-e630-42fe-b81d-cba4e2316da4",
+            "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+            "messagingUrl": "https://messaging.botpress.cloud",
+            "clientId": "648f13ae-e630-42fe-b81d-cba4e2316da4",
+            "webhookId": "e4d92bd6-ce1a-4235-94a3-6d33023627cd",
+            "lazySocket": true,
+            "themeName": "prism",
+            "botName": "Hridaya ",
+            "avatarUrl": "https://img.freepik.com/premium-vector/cute-happy-robot-with-heart-adorable-baby-character-doodle-style-colored-flat-cartoon-vector-illustration-isolated-white-background_198278-12031.jpg",
+            "frontendVersion": "v1",
+            "showBotInfoPage": true,
+            "theme": "prism",
+            "themeColor": "#2563eb"
+        });
+    </script>
+
+</body>
+</html>

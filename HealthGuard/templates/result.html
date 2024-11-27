@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction Result</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            width: 100%;
+            background: #2563eb;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .navbar .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .navbar .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        
+
+        .content {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1c2d33;
+        }
+
+        .prediction-box {
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .red-box {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .green-box {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #1c2d33;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .tips-section {
+            margin-bottom: 30px;
+        }
+
+        .doctor-email-section,
+        .nearby-cardiologists-section {
+            margin-bottom: 30px;
+        }
+
+        .doctor-email-section h2,
+        .nearby-cardiologists-section h2 {
+            margin-top: 30px;
+            color: #1c2d33;
+        }
+
+        .doctor-email-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .doctor-email-section form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .doctor-email-section form button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .doctor-email-section form button:hover {
+            background-color: #7197ea;
+        }
+
+        .nearby-cardiologists-section button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .nearby-cardiologists-section button:hover {
+            background-color: #2e7d32;
+        }
+
+        .prediction {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #1c2d33;
+        }
+
+        .tips {
+            font-size: 28px;
+            margin-bottom: 50px;
+            color: #1c2d33;
+        }
+
+        .tips ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            text-align: left;
+        }
+
+        .tips li {
+            margin-bottom: 20px;
+        }
+
+        .email-doctor {
+            margin-bottom: 80px;
+        }
+
+        .email-doctor button {
+            display: inline-block;
+            width: auto;
+            padding: 14px 28px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        .email-doctor button:hover {
+            background-color: #2e7d32;
+        }
+
+        .nearby-cardiologists {
+            margin-bottom: 80px;
+            font-size: 24px;
+        }
+
+        .get-location {
+            margin-bottom: 80px;
+        }
+
+        .get-location button {
+            display: inline-block;
+            width: auto;
+            padding: 14px 28px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        .get-location button:hover {
+            background-color: #2e7d32;
+        }
+
+        .get-directions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            background-color: #0265fa;
+        }
+
+        .get-directions a {
+            width: 30%;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #2056b3;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 22px;
+        }
+
+        .get-directions a:hover {
+            background-color: #2ebb35;
+        }
+
+        .cardiologist-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .cardiologist-item {
+            width: 30%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .cardiologist-item button {
+            display: inline-block;
+            width: auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cardiologist-item button:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="#">Health Care</a></div>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Re-admission Risk Prediction Result</h1>
+        {% if prediction == "Prone to heart disease" %}
+            <div class="prediction-box red-box">
+                <p>{{ prediction }}</p>
+            </div>
+        {% else %}
+            <div class="prediction-box green-box">
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+
+        <div class="tips-section">
+            <h2>Tips:</h2>
+            <ul>
+                {% for tip in tips %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if prediction == "Prone to heart disease" %}
+            <div class="doctor-email-section">
+                <h2>Send Report to Doctor</h2>
+                <form action="{{ url_for('send_report') }}" method="post">
+                    <label for="doctor_email">Doctor's Email:</label>
+                    <input type="email" id="doctor_email" name="doctor_email" required>
+                    <input type="hidden" name="patient_info" value="{{ patient_info }}">
+                    <input type="hidden" name="prediction" value="{{ prediction }}">
+                    <button type="submit">Send Report</button>
+                </form>
+            </div>
+
+            <!-- <div class="nearby-cardiologists-section">
+                <h2>Cardiologists near you: </h2>
+                <p id="locationResult"><strong>Loading...</strong></p>
+                <button id="getLocationBtn">Get Location</button>
+            </div> -->
+
+        <script>
+            document.getElementById('getLocationBtn').addEventListener('click', () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                } else {
+                    console.error('Geolocation is not supported by this browser.');
+                }
+            });
+
+            function successCallback(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                // Example: Displaying latitude and longitude
+                document.getElementById('locationResult').innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+                fetchNearbyCardiologists(latitude, longitude);
+            }
+
+            function errorCallback(error) {
+                console.error('Error getting location:', error.message);
+            }
+
+            function fetchNearbyCardiologists(latitude, longitude) {
+                const radius = 100000; // Radius in meters (100 kilometers)
+                const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];node[amenity=doctors](around:${radius},${latitude},${longitude});out;`;
+
+                fetch(overpassUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const cardiologists = data.elements
+                            .filter(element => element.tags['name']) // Filter out nodes where name is undefined or empty
+                            .map(element => {
+                                const name = element.tags['name'];
+                                return `${name} <button onclick="getDirections(${latitude},${longitude},${element.lat},${element.lon})">Get Directions</button>`;
+                            });
+                        document.getElementById('locationResult').innerHTML = `Nearby Cardiologists:<br>${cardiologists.join('<br>')}`;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching nearby cardiologists:', error);
+                    });
+            }
+
+            function getDirections(originLat, originLon, destLat, destLon) {
+                const url = `https://www.google.com/maps/dir/${originLat},${originLon}/${destLat},${destLon}`;
+                window.open(url, '_blank');
+            }
+        </script>
+    {% else %}
+        <h2>Improve Your Heart Health</h2>
+        <ul>
+            <li><a href="https://www.bing.com/ck/a?!&&p=3e732af507a691ceJmltdHM9MTcxMjg4MDAwMCZpZ3VpZD0xNmEwM2MyYy0yZmZmLTYxN2YtMDJmYi0yODczMmUxMDYwODAmaW5zaWQ9NTIxMQ&ptn=3&ver=2&hsh=3&fclid=16a03c2c-2fff-617f-02fb-28732e106080&u=a1aHR0cHM6Ly93d3cubWF5b2NsaW5pYy5vcmcvZGlzZWFzZXMtY29uZGl0aW9ucy9oZWFydC1kaXNlYXNlL2luLWRlcHRoL2hlYXJ0LWRpc2Vhc2UtcHJldmVudGlvbi9hcnQtMjAwNDY1MDI&ntb=1" target="_blank">Healthy Living - American Heart Association</a></li>
+            <li><a href="https://www.bing.com/ck/a?!&&p=57ddd92aab03a606JmltdHM9MTcxMjg4MDAwMCZpZ3VpZD0xNmEwM2MyYy0yZmZmLTYxN2YtMDJmYi0yODczMmUxMDYwODAmaW5zaWQ9NTI0Ng&ptn=3&ver=2&hsh=3&fclid=16a03c2c-2fff-617f-02fb-28732e106080&u=a1aHR0cHM6Ly93d3cuaGVhbHRoLmhhcnZhcmQuZWR1L3RvcGljcy9oZWFydC1oZWFsdGg&ntb=1" target="_blank">Healthy Lifestyle - Mayo Clinic</a></li>
+            <li><a href="https://www.bing.com/ck/a?!&&p=169377c65b473c69JmltdHM9MTcxMjg4MDAwMCZpZ3VpZD0xNmEwM2MyYy0yZmZmLTYxN2YtMDJmYi0yODczMmUxMDYwODAmaW5zaWQ9NTI3NQ&ptn=3&ver=2&hsh=3&fclid=16a03c2c-2fff-617f-02fb-28732e106080&u=a1aHR0cHM6Ly93d3cubmNiaS5ubG0ubmloLmdvdi9wbWMvYXJ0aWNsZXMvUE1DMTAxMjgwNzUv&ntb=1" target="_blank">Heart-Healthy Foods - Healthline</a></li>
+        </ul>
+    {% endif %}
+</body>
+</html>

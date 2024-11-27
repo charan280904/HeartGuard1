@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --accent: #ef4444;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(30, 64, 175, 0.9)),
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Prediction Cards Section */
+        .predictions {
+            max-width: 1200px;
+            margin: -100px auto 0;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .prediction-card {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .prediction-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .prediction-card h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .prediction-card p {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            min-height: 4rem;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        /* Chatbot Button */
+        #openChatbot {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #openChatbot:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .predictions {
+                margin-top: -50px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+        df-messenger {
+            --df-messenger-button-titlebar-color: var(--primary);
+            --df-messenger-chat-background-color: #f1f5f9;
+            --df-messenger-font-color: var(--text);
+            --df-messenger-send-icon: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">HeartGuard AI</a>
+            <div class="nav-links">
+                <a href="#predictions">Predictions</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI-Powered Heart Health Prediction</h1>
+            <p>Advanced analytics to assess your heart health risk factors and provide personalized insights</p>
+        </div>
+    </section>
+
+    <section class="predictions" id="predictions">
+        <div class="prediction-card">
+            <h2>Medical Report Analysis</h2>
+            <p>Get precise risk assessment based on your medical reports and clinical data</p>
+            <form action="/predict" method="post">
+                <input type="hidden" name="prediction_type" value="medical">
+                <button type="submit" class="submit-btn">Start Analysis</button>
+            </form>
+        </div>
+
+        <div class="prediction-card">
+            <h2>Lifestyle Risk Assessment</h2>
+            <p>Evaluate your heart health based on daily habits and lifestyle factors</p>
+            <form action="/predict" method="post">
+                <input type="hidden" name="prediction_type" value="lifestyle">
+                <button type="submit" class="submit-btn">Start Assessment</button>
+            </form>
+        </div>
+
+        <div class="prediction-card">
+            <h2>AI Health Assistant</h2>
+            <p>Chat with our AI assistant for personalized heart health guidance</p>
+            <button class="submit-btn" onclick="window.botpressWebChat.sendEvent({ type: 'show' })">
+                Chat with CardioBot
+            </button>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2>Why Choose HeartGuard AI?</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Advanced AI Technology</h3>
+                <p>Our system uses state-of-the-art machine learning algorithms to provide accurate health predictions.</p>
+            </div>
+            <div class="about-card">
+                <h3>Comprehensive Analysis</h3>
+                <p>Get insights from both medical data and lifestyle factors for a complete health assessment.</p>
+            </div>
+            <div class="about-card">
+                <h3>24/7 AI Support</h3>
+                <p>Access our AI health assistant anytime for immediate guidance and answers to your questions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- <button id="openChatbot">
+        <i class="fas fa-comment-dots fa-lg"></i>
+    </button> -->
+
+    <footer>
+        <p>© 2024 HeartGuard AI. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+        window.botpressWebChat.init({
+            composerPlaceholder: "Chat with CardioBot",
+            botConversationDescription: "Your personal Heart Healthcare AI assistant",
+            botId: "648f13ae-e630-42fe-b81d-cba4e2316da4",
+            hostUrl: "https://cdn.botpress.cloud/webchat/v1",
+            messagingUrl: "https://messaging.botpress.cloud",
+            clientId: "648f13ae-e630-42fe-b81d-cba4e2316da4",
+            webhookId: "e4d92bd6-ce1a-4235-94a3-6d33023627cd",
+            lazySocket: true,
+            themeName: "prism",
+            botName: "CardioBot",
+            avatarUrl: "https://img.freepik.com/premium-vector/cute-happy-robot-with-heart-adorable-baby-character-doodle-style-colored-flat-cartoon-vector-illustration-isolated-white-background_198278-12031.jpg",
+            frontendVersion: "v1",
+            showBotInfoPage: true,
+            theme: "prism",
+            themeColor: "#2563eb"
+        });
+    </script>
+
+    <!-- Dialogflow Chatbot Integration
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="HeartGuard Bot"
+        agent-id="https://console.dialogflow.com/api-client/demo/embedded/e5cf3717-5bd2-4ab3-ad93-85e6d75c159a"
+        language-code="en"
+    ></df-messenger> -->
+</body>
+</html>

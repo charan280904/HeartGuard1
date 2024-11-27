@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Lifestyle Prediction</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc; /* Very light gray */
+            color: #1e293b; /* Dark gray-blue */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2563eb; /* Vibrant blue */
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffffff; /* White */
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #ffffff; /* White */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }   
+        .navbar {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .navbar .logo {
+            text-align: center;
+            color: #ffffff; /* White */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .navbar .logo a {
+            color: #ffffff; /* White */
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b; /* Dark gray-blue */
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #64748b; /* Muted grayish-blue */
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #2563eb; /* Vibrant blue */
+            color: #ffffff; /* White */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2563eb; /* Darker blue */
+        }
+
+        .warning {
+            color: #ef4444; /* Bright red */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="#">Health Care</a></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Lifestyle Based Risk Prediction</h1>
+        <form action="/lifestyle_predict" method="post">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age">
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+
+            <label for="height_cm">Height (cm):</label>
+            <input type="text" id="height_cm" name="height_cm">
+
+            <label for="weight_kg">Weight (kg):</label>
+            <input type="text" id="weight_kg" name="weight_kg">
+
+            <h2>Lifestyle-based Questionnaire</h2>
+
+            <!-- Lifestyle questions omitted for brevity -->
+            <label for="physical_activity">How often do you engage in regular physical activity?</label>
+            <select id="physical_activity" name="physical_activity">
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="fish_oil">How frequently do you consume fish or fish oils rich in EHA and DHA?</label>
+            <select id="fish_oil" name="fish_oil">
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="vegetables_fruits">How often do you include vegetables and fruits, especially berries, in your diet?</label>
+            <select id="vegetables_fruits" name="vegetables_fruits">
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="potassium">Do you consume foods rich in potassium, such as bananas and sweet potatoes, on a regular basis?</label>
+            <select id="potassium" name="potassium">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="unsalted_nuts">What is your intake of unsalted nuts and wholegrain cereals?</label>
+            <select id="unsalted_nuts" name="unsalted_nuts">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="plant_sterols">How often do you consume foods containing plant sterols/stanols, such as margarine fortified with sterols?</label>
+            <select id="plant_sterols" name="plant_sterols">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="alcohol_consumption_freq">Do you consume alcohol? If yes, how many alcoholic drinks do you typically have per day or per week?</label>
+            <select id="alcohol_consumption_freq" name="alcohol_consumption_freq">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 drinks per week</option>
+                <option value="3-5">3-5 drinks per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="smoking_frequency">Do you currently smoke tobacco products? If yes, how many cigarettes do you smoke per day?</label>
+            <select id="smoking_frequency" name="smoking_frequency">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-5">1-5 cigarettes per day</option>
+                <option value="6-10">6-10 cigarettes per day</option>
+                <option value="11-20">11-20 cigarettes per day</option>
+                <option value="more_than_20">More than 20 cigarettes per day</option>
+            </select><br>
+
+            <label for="smoking_frequencys">Do you take vitamin E supplements or other dietary supplements regularly?</label>
+            <select id="vitamin_E_supplements" name="vitamin_E_supplements">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select><br>
+
+            <label for="sodium_intake">What is your average daily sodium intake? Do you frequently consume foods high in sodium, such as processed meats and salty snacks?</label>
+            <select id="sodium_intake" name="sodium_intake">
+                <option value="low">Low</option>
+                <option value="moderate">Moderate</option>
+                <option value="high">High</option>
+            </select><br>
+
+            <label for="trans_fatty_acids">How often do you consume foods high in trans fatty acids, such as fried foods and commercially baked goods?</label>
+            <select id="trans_fatty_acids" name="trans_fatty_acids">
+                <option value="no">No</option>
+                <option value="rarely">Rarely or never</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3-5">3-5 times per week</option>
+                <option value="daily">Daily</option>
+            </select><br>
+
+            <label for="unfiltered_boiled_coffee">Do you have a history of consuming unfiltered boiled coffee?</label>
+            <select id="unfiltered_boiled_coffee" name="unfiltered_boiled_coffee">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select><br>
+
+            <label for="existing_medical_conditions">Do you have any existing medical conditions such as diabetes, hypertension, or hypercholesterolemia?</label>
+            <select id="existing_medical_conditions" name="existing_medical_conditions">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select><br>
+
+            <label for="family_history">Do you have a family history of cardiovascular diseases, particularly heart disease?</label>
+            <select id="family_history" name="family_history">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
